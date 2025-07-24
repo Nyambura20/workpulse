@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}WorkPulse | Employee Dashboard{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-green-50 p-6 rounded-lg shadow-md mb-8 border-l-4 border-green-500">
+    <h2 class="text-2xl font-bold mb-2 text-green-800">Employee Dashboard</h2>
+    <p class="text-gray-600">Welcome to your WorkPulse portal. Here you can request leave, view your attendance, and check your performance records.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-4">
+        <div class="bg-green-100 p-3 rounded-full mr-4">
+          <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+        </div>
+        <h3 class="text-lg font-semibold">Request Leave</h3>
+      </div>
+      <p class="text-gray-600 mb-4">Submit a new leave request for approval.</p>
+      <a href="{% url 'submit_leave_request' %}" class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">New Request</a>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-4">
+        <div class="bg-blue-100 p-3 rounded-full mr-4">
+          <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+        </div>
+        <h3 class="text-lg font-semibold">My Leaves</h3>
+      </div>
+      <p class="text-gray-600 mb-4">View your leave history and request status.</p>
+      <a href="{% url 'leave_request_list' %}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">View History</a>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-4">
+        <div class="bg-purple-100 p-3 rounded-full mr-4">
+          <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h3 class="text-lg font-semibold">Attendance</h3>
+      </div>
+      <p class="text-gray-600 mb-4">View your attendance records and statistics.</p>
+      <a href="/attendance/" class="inline-block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">View Attendance</a>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+      <div class="flex items-center mb-4">
+        <div class="bg-yellow-100 p-3 rounded-full mr-4">
+          <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        </div>
+        <h3 class="text-lg font-semibold">Performance</h3>
+      </div>
+      <p class="text-gray-600 mb-4">View your performance evaluations and feedback.</p>
+      <a href="/performance/" class="inline-block bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 transition">View Performance</a>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h3 class="text-lg font-semibold mb-4">Leave Balance</h3>
+      <div class="flex items-center justify-center">
+        <div class="relative w-32 h-32">
+          <svg class="w-32 h-32" viewBox="0 0 36 36">
+            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path class="stroke-current text-green-500" stroke-width="3" fill="none" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <text x="18" y="20.5" class="text-5xl font-semibold" text-anchor="middle" fill="#4B5563">15</text>
+          </svg>
+        </div>
+      </div>
+      <p class="text-center text-gray-600 mt-2">Days Remaining (out of 21)</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow col-span-2">
+      <h3 class="text-lg font-semibold mb-4">Recent Leave Requests</h3>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">From</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Vacation</td>
+              <td class="px-6 py-4 whitespace-nowrap">Jul 10, 2025</td>
+              <td class="px-6 py-4 whitespace-nowrap">Jul 15, 2025</td>
+              <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Approved</span></td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Sick Leave</td>
+              <td class="px-6 py-4 whitespace-nowrap">Jun 05, 2025</td>
+              <td class="px-6 py-4 whitespace-nowrap">Jun 06, 2025</td>
+              <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Approved</span></td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Personal</td>
+              <td class="px-6 py-4 whitespace-nowrap">Aug 20, 2025</td>
+              <td class="px-6 py-4 whitespace-nowrap">Aug 22, 2025</td>
+              <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
